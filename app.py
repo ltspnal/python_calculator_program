@@ -1,6 +1,14 @@
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, render_template
 
 app = Flask(__name__)
+
+# Маршрут для главной страницы
+
+
+@app.route('/')
+def index():
+    return render_template('index.html')
+
 
 @app.route('/calculate', methods=['POST'])
 def calculate():
@@ -21,6 +29,7 @@ def calculate():
         return jsonify({"error": "Invalid operator"}), 400
 
     return jsonify({"result": round(result, 3)})
+
 
 if __name__ == '__main__':
     app.run(debug=True)
